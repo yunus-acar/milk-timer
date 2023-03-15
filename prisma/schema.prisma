@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Influencer {
+  id                 String   @id @default(cuid()) @map("_id")
+  name               String
+  surname            String
+  email              String
+  phone              String?
+  socials            Json[]
+  status             String
+  birthday           DateTime
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  sendEmail          Boolean  @default(false)
+  isRead             Boolean  @default(false)
+  agency             String?
+  notes              String?
+  country            String?
+  city               String?
+  companyInformation Json?
+  isDeleted          Boolean  @default(false)
+
+}
