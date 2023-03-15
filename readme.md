@@ -36,19 +36,8 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
-
-
-
-## API Reference
-
-#### Register
-
-```http
-  POST /api/v1/influencer/register
-```
-
 
 ## Tech Stack
 
@@ -68,6 +57,16 @@ To deploy this project run
   docker run -d -p 4000:4000 juju-influencer-api
 ```
 
+
+
+
+## API Reference
+
+#### Register
+
+```http
+  POST /api/v1/influencer/register
+```
 
 
 
