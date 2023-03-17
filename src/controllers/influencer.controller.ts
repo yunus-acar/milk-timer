@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 class InfluencerController {
   async webRegister(req: Request, res: Response) {
     const data = req.body;
+    console.log("🌵💜🐢", req.body);
+
     try {
       if (!data.email) {
         res.status(400).json({ message: "Email is required" });
@@ -28,6 +30,7 @@ class InfluencerController {
       const influencer = await prisma.influencer.create({
         data: {
           ...data,
+          birthday: new Date(data.birthday),
         },
       });
       res
@@ -126,6 +129,45 @@ class InfluencerController {
         take: limit ? Number(limit) : 10,
       });
       res.status(200).json({ message: "Influencers list", influencers });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error", error });
+    }
+  }
+  async code(req: Request, res: Response) {
+    const { id } = req.params;
+    const { code } = req.body;
+    try {
+      const influencer = await prisma.influencer.update({
+        where: {
+          id: id,
+        },
+        data: {
+          code: code,
+        },
+      });
+      res
+        .status(200)
+        .json({ message: "Influencer code updated successfully", influencer });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error", error });
+    }
+  }
+  async status(req: Request, res: Response) {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+      const influencer = await prisma.influencer.update({
+        where: {
+          id: id,
+        },
+        data: {
+          status: status,
+        },
+      });
+      res.status(200).json({
+        message: "Influencer status updated successfully",
+        influencer,
+      });
     } catch (error) {
       res.status(500).json({ message: "Internal server error", error });
     }

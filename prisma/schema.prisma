@@ -17,7 +17,7 @@ model Influencer {
   email              String
   phone              String?
   socials            Json[]
-  status             String
+  status             Status   @default(pending)
   birthday           DateTime
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
@@ -29,5 +29,11 @@ model Influencer {
   city               String?
   companyInformation Json?
   isDeleted          Boolean  @default(false)
+  code               String?  @unique
+}
 
+enum Status {
+  pending
+  accepted
+  rejected
 }
