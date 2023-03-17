@@ -9,5 +9,7 @@ router.put("/update/:id", influencer.update);
 router.delete("/delete/:id", influencer.delete);
 router.delete("/web-delete/:id", influencer.webDelete);
 router.get("/list", influencer.list);
+router.post("/code/:id", influencer.code);
+router.post("/status/:id", influencer.status);
 
 export default router;
