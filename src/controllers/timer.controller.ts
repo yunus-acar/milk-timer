@@ -36,7 +36,16 @@ class TimerController {
     if (!userById[id])
       return res.status(400).json({ message: "user not found" });
     try {
-      return res.status(200).json({ message: "success", data: userById[id] });
+      const children = await prisma.milk.findMany({
+        where: {
+          cardId: {
+            equals: id,
+          },
+        },
+      });
+      return res
+        .status(200)
+        .json({ message: "success", name: userById[id], data: children });
     } catch (error) {
       console.log("🌵💜🐢 error", error);
       return res.status(500).json({ status: "error", message: error.message });
@@ -49,6 +58,9 @@ class TimerController {
     try {
       const list = await prisma.milk.findMany({
         where,
+        orderBy: {
+          date: "desc",
+        },
       });
       return res.status(200).json({ message: "success", data: list });
     } catch (error) {
@@ -66,7 +78,7 @@ class TimerController {
           },
           status: Status.MILK,
         },
-        by: ["cardId"],
+        by: ["name"],
         _count: {
           name: true,
         },
