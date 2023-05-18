@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import axios from "axios";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Status } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const userById: any = {
@@ -53,6 +53,30 @@ class TimerController {
       return res.status(200).json({ message: "success", data: list });
     } catch (error) {
       console.log("🌵💜🐢 error", error);
+      return res.status(500).json({ status: "error", message: error.message });
+    }
+  }
+  async dayCount(req: Request, res: Response) {
+    const { id } = req.params;
+    if (!id) return res.status(400).json({ message: "id is required" });
+    if (!userById[id])
+      return res.status(400).json({ message: "user not found" });
+    try {
+      const list = await prisma.milk.groupBy({
+        where: {
+          date: {
+            gte: new Date(new Date().setHours(0, 0, 0, 0)),
+            lte: new Date(new Date().setHours(23, 59, 59, 999)),
+          },
+          status: Status.MILK,
+        },
+        by: ["cardId"],
+        _count: {
+          name: true,
+        },
+      });
+      return res.status(200).json({ message: "success", data: list });
+    } catch (error) {
       return res.status(500).json({ status: "error", message: error.message });
     }
   }
