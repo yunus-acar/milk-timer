@@ -56,7 +56,7 @@ class TimerController {
   async list(req: Request, res: Response) {
     let where: any = {};
     const { id } = req.query;
-    if (id) where = { cardId: id };
+    if (id) where = { cardId: { set: id } };
     try {
       const list = await prisma.milk.findMany({
         where,
