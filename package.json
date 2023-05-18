@@ -10,15 +10,11 @@
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
-    "@sendgrid/mail": "^7.7.0",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
-    "jssoup": "^0.0.15",
-    "node-wsdl": "^1.0.1",
-    "prisma": "^4.3.1",
-    "sendgrid": "^5.2.3"
+    "prisma": "^4.3.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
