@@ -1,9 +1,8 @@
-import influencerRoute from './influencer.route';
-import { Router } from 'express';
+import influencerRoute from "./timer.route";
+import { Router } from "express";
 
 const router = Router();
 
-router.use('/influencer', influencerRoute);
-
+router.use("/milk", influencerRoute);
 
 export default router;
