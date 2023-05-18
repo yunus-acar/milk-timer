@@ -57,10 +57,6 @@ class TimerController {
     }
   }
   async dayCount(req: Request, res: Response) {
-    const { id } = req.params;
-    if (!id) return res.status(400).json({ message: "id is required" });
-    if (!userById[id])
-      return res.status(400).json({ message: "user not found" });
     try {
       const list = await prisma.milk.groupBy({
         where: {
