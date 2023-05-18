@@ -18,7 +18,9 @@ class TimerController {
       const { time, status } = req.body;
       const create = await prisma.milk.create({
         data: {
-          cardId: id,
+          cardId: {
+            set: id,
+          },
           name: userById[id] as string,
           date: new Date(time),
           status: status,
