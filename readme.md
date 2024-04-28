@@ -1,8 +1,4 @@
 
-# JUJU Mood Influencer API
-The backend part of the site that will be opened for influencers to apply.
-
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
